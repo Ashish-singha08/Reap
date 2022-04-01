@@ -1,0 +1,25 @@
+
+<nav class="navbar background h-nav-resp">
+  <ul class="nav-list v-class-resp">
+    <div class="logo"><img src="assets/logo/logo.png" alt="logo"></div>
+    <li  *ngIf="isLoggedIn" >
+      <a routerLink="/dashboard" >Dashboard</a>
+    </li>
+
+    <li  *ngIf="isLoggedIn" >
+      <a  routerLink="/addPatient" >Add Patient</a>
+    </li>
+    <li class="nav-item" *ngIf="!isLoggedIn">
+      <a >Login</a>
+    </li>
+    <li  *ngIf="isLoggedIn">
+      <a  (click)="logout()">Logout</a>
+    </li>
+  </ul>
+
+  <div class="burger">
+    <div class="line"></div>
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+</nav>
