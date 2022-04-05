@@ -3,8 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { StoreComponent } from './components/store/store.component';
 import { AuthGuard } from './services/auth.guard';
-
+import { TestComponent } from './components/test/test.component'
 const routes: Routes = [
   {
     path:'',
@@ -19,6 +20,18 @@ const routes: Routes = [
   {
     path:'dashboard',
     component:DashboardComponent,
+    pathMatch:'full',
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'store',
+    component:StoreComponent,
+    pathMatch:'full',
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'test',
+    component:TestComponent,
     pathMatch:'full',
     canActivate:[AuthGuard]
   },

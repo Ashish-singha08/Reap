@@ -14,19 +14,24 @@ import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginService } from './services/login.service';
 import { AuthGuard } from './services/auth.guard';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { PatientService } from './services/patient.service';
+import {EndorseService} from './services/endorse.service';
 
 // import { MatOption } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import  {MatRadioModule} from '@angular/material/radio';
 import { IonicModule } from '@ionic/angular';
+import {StoreComponent} from "./components/store/store.component";
+import {MatTabsModule} from "@angular/material/tabs";
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { TestComponent } from "./components/test/test.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +40,8 @@ import { IonicModule } from '@ionic/angular';
     HomeComponent,
     LoginComponent,
     DashboardComponent,
+    StoreComponent,
+    TestComponent
   ],
   imports: [
     MbscModule,
@@ -43,7 +50,7 @@ import { IonicModule } from '@ionic/angular';
     BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
-    MatFormFieldModule,
+
     MatInputModule,
     FormsModule,
     HttpClientModule,
@@ -51,10 +58,15 @@ import { IonicModule } from '@ionic/angular';
     MatCheckboxModule,
     MatAutocompleteModule,
     MatRadioModule,
-    IonicModule.forRoot()
+    IonicModule.forRoot(),
+    MatTabsModule,
+    MatFormFieldModule,
+    NgxMatSelectSearchModule,
+    ReactiveFormsModule
+
 
   ],
-  providers: [LoginService, PatientService ,AuthGuard, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
+  providers: [LoginService, PatientService ,AuthGuard, EndorseService, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

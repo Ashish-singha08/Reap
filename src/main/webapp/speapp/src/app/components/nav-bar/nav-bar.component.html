@@ -1,16 +1,16 @@
 
 <nav class="navbar background h-nav-resp">
   <ul class="nav-list v-class-resp">
-    <div class="logo"><img src="assets/logo/logo.png" alt="logo"></div>
+    <div class="logo" routerLink="/"><img src="assets/logo/logo.png" alt="logo"></div>
     <li  *ngIf="isLoggedIn" >
       <a routerLink="/dashboard" >Dashboard</a>
     </li>
 
     <li  *ngIf="isLoggedIn" >
-      <a  routerLink="/addPatient" >Add Patient</a>
+      <a  routerLink="/test" >Store</a>
     </li>
     <li class="nav-item" *ngIf="!isLoggedIn">
-      <a >Login</a>
+      <a routerLink="/login">Login</a>
     </li>
     <li  *ngIf="isLoggedIn">
       <a  (click)="logout()">Logout</a>

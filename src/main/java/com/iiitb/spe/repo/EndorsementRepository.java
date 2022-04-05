@@ -2,18 +2,16 @@ package com.iiitb.spe.repo;
 
 import com.iiitb.spe.model.entities.EndorsementEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 
 public interface EndorsementRepository extends JpaRepository<EndorsementEntity,Integer> {
 
-   // @Query(value="SELECT * FROM Patient P INNER JOIN UserPermissionPatient UPP ON P.Id = UPP.PatientId WHERE UPP.UserId = ?1 AND UPP.CanView=1",nativeQuery = true)
-    //List<PatientEntity> findAllPatientByUser(long id);
+     @Query(value="SELECT * FROM Endorsement where GiverId=?1",nativeQuery = true)
+     List<EndorsementEntity> findAllEndorsementsByGiverId(long userId);
 
-    //List<PatientEntity> findById(long id);
-
-//    List<PatientEntity> findByAbhaId(String abhaId);
-//
-//    List<PatientEntity> findByFirstName(String firstName);
-//
-//    List<PatientEntity> findByPhoneNumber(String phoneNumber);
+     @Query(value="SELECT * FROM Endorsement where TakerId=?1",nativeQuery = true)
+     List<EndorsementEntity> findAllEndorsementsByTakerId(long userId);
 }
