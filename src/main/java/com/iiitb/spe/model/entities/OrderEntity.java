@@ -21,10 +21,10 @@ public class OrderEntity {
     @Column(name = "ItemId")
     private long itemId;
     @ManyToOne
-    @JoinColumn(name = "UserId", referencedColumnName = "Id", nullable = false,insertable = false, updatable = false)
+    @JoinColumn(name = "UserId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByUserId;
     @ManyToOne
-    @JoinColumn(name = "ItemId", referencedColumnName = "Id", nullable = false,insertable = false, updatable = false)
+    @JoinColumn(name = "ItemId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private ItemEntity itemByItemId;
 
     public long getId() {

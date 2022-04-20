@@ -10,7 +10,7 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     public UserEntity findByUsername(String username);
-    
+
     @Transactional
     @Modifying
     @Query (value ="UPDATE User SET CoinBalance =?1 where Id=?2",nativeQuery = true)

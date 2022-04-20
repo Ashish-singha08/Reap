@@ -30,13 +30,13 @@ public class EndorsementEntity {
     @Column(name = "TagId")
     private long tagId;
     @ManyToOne
-    @JoinColumn(name = "GiverId", referencedColumnName = "Id", nullable = false,insertable = false, updatable = false)
+    @JoinColumn(name = "GiverId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByGiverId;
     @ManyToOne
-    @JoinColumn(name = "TakerId", referencedColumnName = "Id", nullable = false,insertable = false, updatable = false)
+    @JoinColumn(name = "TakerId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByTakerId;
     @ManyToOne
-    @JoinColumn(name = "TagId", referencedColumnName = "Id", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "TagId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private TagEntity tagByTagId;
 
     public long getId() {

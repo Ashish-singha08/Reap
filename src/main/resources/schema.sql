@@ -30,19 +30,47 @@ CREATE TABLE `Endorsement` (
                                `Message` VARCHAR(300) NOT NULL,
                                `CoinsEndorsed` INT NOT NULL,
                                `TagId` BIGINT NOT NULL
-)
+);
 
 CREATE TABLE `Order` (
                                `Id` BIGINT PRIMARY KEY,
                                `UserId` BIGINT NOT NULL,
                                `OrderedOn`  DATETIME NOT NULL,
                                `ItemId` BIGINT NOT NULL
-)
+);
+CREATE TABLE Notification(
+                                `Id` BIGINT PRIMARY KEY,
+                                `NotificationTo` BIGINT NOT NULL,
+                                `NotificationFrom`BIGINT NOT NULL,
+                                `Message` VARCHAR (200) NOT NULL,
+                                `Flag` INT NOT NULL
+);
 
+CREATE TABLE Questions(
+                                `Id` BIGINT PRIMARY KEY,
+                                `Question` VARCHAR(300) NOT NULL ,
+                                `AskedByUserId` BIGINT NOT NULL,
+                                `AskedToUserId` BIGINT NOT NULL,
+                                `AnsweredByUserId` BIGINT,
+                                `ForwardedByUserId` BIGINT,
+                                `Answer` VARCHAR(400)
+);
 ALTER TABLE `Endorsement` ADD CONSTRAINT FK_Endorsement_GiverUser FOREIGN KEY (`GiverId`) REFERENCES `User` (`Id`);
 
 ALTER TABLE `Endorsement` ADD CONSTRAINT FK_Endorsement_TakerUser FOREIGN KEY (`TakerId`) REFERENCES `User` (`Id`);
 
-ALTER TABLE `Endorsement` ADD CONSTRAINT FK_Endorsement_TagUsedByUser FOREIGN KEY (`TagId`) REFERENCES `Tags` (`Id`);
+ALTER TABLE `Endorsement` ADD CONSTRAINT FK_Endorsement_TagUsedByUser FOREIGN KEY (`TagId`) REFERENCES `Tag` (`Id`);
 
-ALTER TABLE `Order` ADD CONSTRAINT FK_Order_User FOREIGN KEY (`ItemId`) REFERENCES `Items` (`Id`);
+ALTER TABLE `Order` ADD CONSTRAINT FK_Order_User FOREIGN KEY (`ItemId`) REFERENCES `Item` (`Id`);
+
+ALTER TABLE `Notification` ADD CONSTRAINT FK_NotificationTo_Userid FOREIGN KEY (`NotificationTo`) REFERENCES `User` (`Id`);
+
+ALTER TABLE `Notification` ADD CONSTRAINT FK_NotificationFrom_Userid FOREIGN KEY (`NotificationFrom`) REFERENCES `User` (`Id`);
+
+ALTER TABLE `Questions` ADD CONSTRAINT Fk_Question_UserId FOREIGN KEY (`AskedByUserId`) REFERENCES `User` (`Id`);
+
+ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionTo_UserId FOREIGN KEY (`AskedToUserId`) REFERENCES `User` (`Id`);
+
+ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionAnswered_UserId FOREIGN KEY (`AnsweredByUserId`) REFERENCES `User` (`Id`);
+
+ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionForwardedBy_UserId FOREIGN KEY (`ForwardedByUserId`) REFERENCES `User` (`Id`);

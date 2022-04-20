@@ -29,33 +29,27 @@ public class UserEntity {
     @Basic
     @Column(name = "Password")
     private String password;
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-
     @Basic
     @Column(name = "CoinBalance")
     private int coinBalance;
-    public int getCoinsBalance() {
-        return coinBalance;
-    }
-
-    public void setCoinsBalance(int coinBalance) {
-        this.coinBalance = coinBalance;
-    }
-
     @OneToMany(mappedBy = "userByGiverId")
     private Collection<EndorsementEntity> endorsementsById;
     @OneToMany(mappedBy = "userByTakerId")
     private Collection<EndorsementEntity> endorsementsById_0;
+    @OneToMany(mappedBy = "userByNotificationTo")
+    private Collection<NotificationEntity> notificationsById;
+    @OneToMany(mappedBy = "userByNotificationFrom")
+    private Collection<NotificationEntity> notificationsById_0;
     @OneToMany(mappedBy = "userByUserId")
     private Collection<OrderEntity> ordersById;
+    @OneToMany(mappedBy = "userByAskedByUserId")
+    private Collection<QuestionsEntity> questionsById;
+    @OneToMany(mappedBy = "userByAskedToUserId")
+    private Collection<QuestionsEntity> questionsById_0;
+    @OneToMany(mappedBy = "userByAnsweredByUserId")
+    private Collection<QuestionsEntity> questionsById_1;
+    @OneToMany(mappedBy = "userByForwardedByUserId")
+    private Collection<QuestionsEntity> questionsById_2;
 
     public long getId() {
         return id;
@@ -105,17 +99,33 @@ public class UserEntity {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getCoinBalance() {
+        return coinBalance;
+    }
+
+    public void setCoinBalance(int coinBalance) {
+        this.coinBalance = coinBalance;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
-        return id == that.id && Objects.equals(username, that.username) && Objects.equals(fullName, that.fullName) && Objects.equals(roleTypeId, that.roleTypeId) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber);
+        return id == that.id && coinBalance == that.coinBalance && Objects.equals(username, that.username) && Objects.equals(fullName, that.fullName) && Objects.equals(roleTypeId, that.roleTypeId) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(password, that.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, username, fullName, roleTypeId, email, phoneNumber);
+        return Objects.hash(id, username, fullName, roleTypeId, email, phoneNumber, password, coinBalance);
     }
 
     public Collection<EndorsementEntity> getEndorsementsById() {
@@ -134,11 +144,59 @@ public class UserEntity {
         this.endorsementsById_0 = endorsementsById_0;
     }
 
+    public Collection<NotificationEntity> getNotificationsById() {
+        return notificationsById;
+    }
+
+    public void setNotificationsById(Collection<NotificationEntity> notificationsById) {
+        this.notificationsById = notificationsById;
+    }
+
+    public Collection<NotificationEntity> getNotificationsById_0() {
+        return notificationsById_0;
+    }
+
+    public void setNotificationsById_0(Collection<NotificationEntity> notificationsById_0) {
+        this.notificationsById_0 = notificationsById_0;
+    }
+
     public Collection<OrderEntity> getOrdersById() {
         return ordersById;
     }
 
     public void setOrdersById(Collection<OrderEntity> ordersById) {
         this.ordersById = ordersById;
+    }
+
+    public Collection<QuestionsEntity> getQuestionsById() {
+        return questionsById;
+    }
+
+    public void setQuestionsById(Collection<QuestionsEntity> questionsById) {
+        this.questionsById = questionsById;
+    }
+
+    public Collection<QuestionsEntity> getQuestionsById_0() {
+        return questionsById_0;
+    }
+
+    public void setQuestionsById_0(Collection<QuestionsEntity> questionsById_0) {
+        this.questionsById_0 = questionsById_0;
+    }
+
+    public Collection<QuestionsEntity> getQuestionsById_1() {
+        return questionsById_1;
+    }
+
+    public void setQuestionsById_1(Collection<QuestionsEntity> questionsById_1) {
+        this.questionsById_1 = questionsById_1;
+    }
+
+    public Collection<QuestionsEntity> getQuestionsById_2() {
+        return questionsById_2;
+    }
+
+    public void setQuestionsById_2(Collection<QuestionsEntity> questionsById_2) {
+        this.questionsById_2 = questionsById_2;
     }
 }
