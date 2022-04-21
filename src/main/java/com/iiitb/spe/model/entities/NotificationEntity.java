@@ -1,6 +1,7 @@
 package com.iiitb.spe.model.entities;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -20,8 +21,15 @@ public class NotificationEntity {
     @Column(name = "Message")
     private String message;
     @Basic
-    @Column(name = "Flag")
-    private int flag;
+    @Column(name = "isVisited")
+    private int isVisited;
+    @Basic
+    @Column(name = "isForEndorsement")
+    private int isForEndorsement;
+
+    @Basic
+    @Column(name = "CreatedOn")
+    private Timestamp createdOn;
     @ManyToOne
     @JoinColumn(name = "NotificationTo", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByNotificationTo;
@@ -45,6 +53,14 @@ public class NotificationEntity {
         this.notificationTo = notificationTo;
     }
 
+    public Timestamp getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Timestamp createdOn) {
+        this.createdOn = createdOn;
+    }
+
     public long getNotificationFrom() {
         return notificationFrom;
     }
@@ -61,25 +77,20 @@ public class NotificationEntity {
         this.message = message;
     }
 
-    public int getFlag() {
-        return flag;
+    public int getIsVisited() {
+        return isVisited;
     }
 
-    public void setFlag(int flag) {
-        this.flag = flag;
+    public void setIsVisited(int isVisited) {
+        this.isVisited = isVisited;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        NotificationEntity that = (NotificationEntity) o;
-        return id == that.id && notificationTo == that.notificationTo && notificationFrom == that.notificationFrom && flag == that.flag && Objects.equals(message, that.message);
+    public int getIsForEndorsement() {
+        return isForEndorsement;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, notificationTo, notificationFrom, message, flag);
+    public void setIsForEndorsement(int isForEndorsement) {
+        this.isForEndorsement = isForEndorsement;
     }
 
     public UserEntity getUserByNotificationTo() {

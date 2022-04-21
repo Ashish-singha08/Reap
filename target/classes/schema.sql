@@ -39,15 +39,17 @@ CREATE TABLE `Order` (
                                `ItemId` BIGINT NOT NULL
 );
 CREATE TABLE Notification(
-                                `Id` BIGINT PRIMARY KEY,
+                                `Id` BIGINT PRIMARY KEY AUTO_INCREMENT,
                                 `NotificationTo` BIGINT NOT NULL,
                                 `NotificationFrom`BIGINT NOT NULL,
                                 `Message` VARCHAR (200) NOT NULL,
-                                `Flag` INT NOT NULL
+                                `CreatedOn`  DATETIME NOT NULL,
+                                `isVisited` INT NOT NULL,
+                                `isForEndorsement` INT NOT NULL
 );
 
 CREATE TABLE Questions(
-                                `Id` BIGINT PRIMARY KEY,
+                                `Id` BIGINT PRIMARY KEY AUTO_INCREMENT,
                                 `Question` VARCHAR(300) NOT NULL ,
                                 `AskedByUserId` BIGINT NOT NULL,
                                 `AskedToUserId` BIGINT NOT NULL,

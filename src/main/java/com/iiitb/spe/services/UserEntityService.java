@@ -24,6 +24,10 @@ public class UserEntityService {
         UserEntity user = userRepository.findByUsername(username);
         return user;
     }
+    public UserEntity getUserDetails(long id){
+        UserEntity user = userRepository.findById(id);
+        return user;
+    }
     public String updateCoins(int coins, long id){
         userRepository.updateCoins(coins,id);
         return "Coins Updated";
