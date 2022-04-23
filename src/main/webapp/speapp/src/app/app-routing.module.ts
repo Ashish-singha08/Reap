@@ -5,7 +5,7 @@ import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { StoreComponent } from './components/store/store.component';
 import { AuthGuard } from './services/auth.guard';
-import { TestComponent } from './components/test/test.component'
+
 const routes: Routes = [
   {
     path:'',
@@ -29,12 +29,7 @@ const routes: Routes = [
     pathMatch:'full',
     canActivate:[AuthGuard]
   },
-  {
-    path:'test',
-    component:TestComponent,
-    pathMatch:'full',
-    canActivate:[AuthGuard]
-  },
+
 
 
 ];

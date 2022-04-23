@@ -34,27 +34,35 @@
       </ng-template>
     </mat-tab>
 
-    <mat-tab label="{{tab3}}">
-      <ng-template matTabContent>
 
-        <mat-form-field style="margin:50px" (keydown.enter) ="onSubmit()" >
-          <mat-select [formControl]="websiteCtrl" placeholder="Employee ID" #singleSelect [(ngModel)]="testWebsite">
-            <mat-option>
-              <ngx-mat-select-search [formControl]="websiteFilterCtrl"></ngx-mat-select-search>
-            </mat-option>
+    <mat-tab label="{{tab3}}" >
+      <ng-template matTabContent >
+        <div class="list-item">
+          <mat-list>
+            <h3 matSubheader>Folders</h3>
+            <mat-list-item *ngFor="let message of questions" >
+              <img matListAvatar src="..." alt="...">
+              <h3 matLine> {{message.AskedBy}} </h3>
+              <p matLine>
+                <span> {{message.text}} </span>
+                <span class="demo-2"> -- {{message.AskedOn}} </span>
+              </p>
+              <button   style="padding: 15px" class="mat-raised-button mat-primary"(click)="save(message.AskedOn)">Save</button>
+            </mat-list-item>
 
-            <mat-option *ngFor="let website of filteredWebsites | async" [value]="website">
-              {{website.name}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+          </mat-list>
 
-
-
+        </div>
 
       </ng-template>
     </mat-tab>
 
+    <mat-tab label="{{tab4}}">
+      <ng-template matTabContent>
+
+
+      </ng-template>
+    </mat-tab>
   </mat-tab-group>
 </div>
 

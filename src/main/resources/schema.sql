@@ -1,5 +1,12 @@
-USE Reap;
 
+USE Reap;
+# DROP TABLE `User`;
+# DROP TABLE `Tag`;
+# DROP TABLE `Item`;
+# DROP TABLE `Questions`;
+# DROP TABLE `Endorsement`;
+# DROP TABLE `Notification`;
+# DROP TABLE `Orders`;
 CREATE TABLE `User` (
                         `Id` BIGINT PRIMARY KEY,
                         `Username` VARCHAR(100) NOT NULL UNIQUE,
@@ -12,18 +19,18 @@ CREATE TABLE `User` (
 );
 
 CREATE TABLE `Tag` (
-                               `Id` INT PRIMARY KEY,
+                               `Id` BIGINT PRIMARY KEY,
                                `Tag` VARCHAR(100) NOT NULL UNIQUE
 );
 
 CREATE TABLE `Item` (
-                        `Id` INT PRIMARY KEY,
+                        `Id` BIGINT PRIMARY KEY,
                         `Name` VARCHAR(100) NOT NULL UNIQUE,
                         `CoinsRequired` INT NOT NULL
 );
 
 CREATE TABLE `Endorsement` (
-                               `Id` BIGINT PRIMARY KEY,
+                               `Id` BIGINT PRIMARY KEY AUTO_INCREMENT,
                                `GiverId` BIGINT NOT NULL,
                                `TakerId` BIGINT NOT NULL,
                                `EndorsedOn`  DATETIME NOT NULL,
@@ -33,7 +40,7 @@ CREATE TABLE `Endorsement` (
 );
 
 CREATE TABLE `Orders` (
-                               `Id` BIGINT PRIMARY KEY,
+                               `Id` BIGINT PRIMARY KEY AUTO_INCREMENT,
                                `UserId` BIGINT NOT NULL,
                                `OrderedOn`  DATETIME NOT NULL,
                                `ItemId` BIGINT NOT NULL
@@ -77,4 +84,5 @@ ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionAnswered_UserId FOREIGN KEY (`
 
 ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionForwardedBy_UserId FOREIGN KEY (`ForwardedByUserId`) REFERENCES `User` (`Id`);
 
-INSERT INTO User (Id,Username,FullName,RoleTypeId,Email,PhoneNumber,Password,CoinBalance) VALUES ('3','bs2305','Aman Arora','MT2020012','aman@gmial.com','1234567890','1234','200');
+
+INSERT INTO User (Id,Username,FullName,RoleTypeId,Email,PhoneNumber,Password,CoinBalance) VALUES ('1','bs2305','Aman Arora','MT2020012','aman@gmial.com','1234567890','1234','200');

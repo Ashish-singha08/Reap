@@ -1,4 +1,4 @@
-import { MbscModule } from '@mobiscroll/angular';
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -22,7 +22,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { PatientService } from './services/patient.service';
 import {EndorseService} from './services/endorse.service';
-
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
 // import { MatOption } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -31,8 +32,10 @@ import { IonicModule } from '@ionic/angular';
 import {StoreComponent} from "./components/store/store.component";
 import {MatTabsModule} from "@angular/material/tabs";
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import { TestComponent } from "./components/test/test.component";
-
+import {MatDialogModule} from "@angular/material/dialog";
+import {DialogComponent} from "./components/dialogbox/dialog.component";
+import {EndroseComponent} from "./components/endroseform/endrose.component";
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,16 +44,22 @@ import { TestComponent } from "./components/test/test.component";
     LoginComponent,
     DashboardComponent,
     StoreComponent,
-    TestComponent
+    DialogComponent,
+    EndroseComponent,
   ],
   imports: [
-    MbscModule,
+
+    MatListModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatToolbarModule,
-
+    ToastrModule.forRoot({
+      timeOut: 5000, // 5 seconds
+      closeButton: true,
+      progressBar: true,
+    }),
     MatInputModule,
     FormsModule,
     HttpClientModule,
@@ -62,9 +71,9 @@ import { TestComponent } from "./components/test/test.component";
     MatTabsModule,
     MatFormFieldModule,
     NgxMatSelectSearchModule,
-    ReactiveFormsModule
-
-
+    ReactiveFormsModule,
+    MatDialogModule,
+    MatIconModule,
   ],
   providers: [LoginService, PatientService ,AuthGuard, EndorseService, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]

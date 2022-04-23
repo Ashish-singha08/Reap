@@ -21,10 +21,10 @@
     "@angular/platform-browser-dynamic": "~13.2.0",
     "@angular/router": "~13.2.0",
     "@ionic/angular": "^6.0.14",
-    "@mobiscroll/angular": "https://npm.mobiscroll.com/@mobiscroll/angular-trial/-/angular-trial-5.14.1.tgz",
     "bootstrap": "^5.1.3",
     "bulma": "^0.9.3",
     "ngx-mat-select-search": "^4.0.2",
+    "ngx-toastr": "^14.3.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

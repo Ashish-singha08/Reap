@@ -1,0 +1,46 @@
+<div class="dialog-title">
+  <h1 mat-dialog-title>Endorse Someone</h1>
+</div>
+
+
+<mat-dialog-content [formGroup]="form" class="dialog-content">
+
+   <mat-form-field style="margin:10px"  >
+     <mat-select [formControl]="employeeCtrl" placeholder="Employee ID" #singleSelect [(ngModel)]="selectedEmployee">
+       <mat-option>
+         <ngx-mat-select-search [formControl]="employeeFilterCtrl"></ngx-mat-select-search>
+       </mat-option>
+
+       <mat-option *ngFor="let employee of filteredEmployees | async" [value]="employee">
+         {{employee.name}}
+       </mat-option>
+     </mat-select>
+   </mat-form-field>
+
+   <mat-form-field style="margin:10px"  >
+     <mat-select [formControl]="tagCtrl" placeholder="Tag ID" #singleSelect [(ngModel)]="selectedTag">
+       <mat-option>
+         <ngx-mat-select-search [formControl]="tagFilterCtrl"></ngx-mat-select-search>
+       </mat-option>
+
+       <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+         {{tag.name}}
+       </mat-option>
+     </mat-select>
+   </mat-form-field>
+  <mat-form-field class="example-full-width" >
+    <mat-label>Type Your Message Here</mat-label>
+    <textarea  matInput cdkTextareaAutosize
+               cdkAutosizeMinRows="2"
+               cdkAutosizeMaxRows="7" [(ngModel)]="message" [ngModelOptions]="{standalone: true}" ></textarea>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<div>
+  <mat-dialog-actions >
+    <button  class="mat-raised-button"(click)="close()">Close</button>
+    <button    class="mat-raised-button mat-primary"(click)="save()">Save</button>
+  </mat-dialog-actions>
+</div>
+
