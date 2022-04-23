@@ -1,5 +1,7 @@
 package com.iiitb.spe.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public class TagEntity {
     @Basic
     @Column(name = "Tag")
     private String tag;
+    @JsonIgnore
     @OneToMany(mappedBy = "tagByTagId")
     private Collection<EndorsementEntity> endorsementsById;
 

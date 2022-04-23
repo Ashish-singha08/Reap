@@ -6,6 +6,7 @@ import java.util.Map;
 import com.iiitb.spe.model.entities.QuestionsEntity;
 import com.iiitb.spe.model.entities.UserEntity;
 import com.iiitb.spe.repo.QuestionRepository;
+import com.iiitb.spe.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 public class QuestionsEntityService {
     @Autowired
     private QuestionRepository questionRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     public List<QuestionsEntity> getAllQuestionsAskedByUser(UserEntity user){
         long userId = user.getId();
@@ -31,19 +35,20 @@ public class QuestionsEntityService {
     }
     public String updateAnsweredByUser(Map<String,Object> payload,UserEntity user){
         long userId = user.getId();
-        String answer="";
-        long qId=1;
+        String answer= (String)payload.get("Answer");
+        long qId=  Long.valueOf((String)payload.get("QuestionId"));
         questionRepository.updateAnsweredBy(qId,userId,answer);
-        return "Done";
+        userRepository.updateCoins(user.getCoinBalance()+20,userId);
+        return "AnswerDone";
     }
     public String updateForwardedByUser(Map<String,Object> payload,UserEntity user){
         long userId = user.getId();
-        long qId=1;
-        long userToAnswerId = (long)payload.get("AnswerId");
-        String answer="";
+        long qId= Long.valueOf((String)payload.get("QuestionId"));
 
-        questionRepository.updateForwardedBy(qId,userId,userToAnswerId);
-        return "Done";
+        long userToAnswerId = Long.valueOf((String)payload.get("ForwardedToUserId"));
+        questionRepository.updateForwardedBy(qId,userToAnswerId,userId);
+
+        return "ForwardedDone";
     }
 
     public String createQuestion(Map<String,Object> payload,UserEntity user){
@@ -51,7 +56,7 @@ public class QuestionsEntityService {
             QuestionsEntity question = new QuestionsEntity();
             question.setQuestion((String)payload.get("Question"));
             question.setAskedByUserId(user.getId());
-            question.setAskedToUserId((long)(payload.get("answerId")));
+            question.setAskedToUserId(Long.valueOf((String) payload.get("answerId")));
             QuestionsEntity ques = questionRepository.save(question);
             return "Done";
         }

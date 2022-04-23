@@ -7,9 +7,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserEntityService {
@@ -28,8 +30,12 @@ public class UserEntityService {
         UserEntity user = userRepository.findById(id);
         return user;
     }
-    public String updateCoins(int coins, long id){
-        userRepository.updateCoins(coins,id);
+    public String updateCoins(@RequestBody Map<String,Object> payload, UserEntity user, boolean flag){
+        int coins = Integer.valueOf((String) payload.get("coins"));
+        if(!flag)
+          userRepository.updateCoins(user.getCoinBalance()-coins,user.getId());
+        else
+            userRepository.updateCoins(user.getCoinBalance()+coins,user.getId());
         return "Coins Updated";
     }
 }

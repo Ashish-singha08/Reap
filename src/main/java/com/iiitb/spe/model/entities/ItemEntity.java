@@ -1,5 +1,7 @@
 package com.iiitb.spe.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -17,6 +19,7 @@ public class ItemEntity {
     @Basic
     @Column(name = "CoinsRequired")
     private int coinsRequired;
+    @JsonIgnore
     @OneToMany(mappedBy = "itemByItemId")
     private Collection<OrderEntity> ordersById;
 

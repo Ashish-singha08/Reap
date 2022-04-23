@@ -1,5 +1,7 @@
 package com.iiitb.spe.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -28,15 +30,19 @@ public class QuestionsEntity {
     @Basic
     @Column(name = "Answer")
     private String answer;
+
     @ManyToOne
     @JoinColumn(name = "AskedByUserId", referencedColumnName = "Id", nullable = false,insertable=false, updatable=false)
     private UserEntity userByAskedByUserId;
+
     @ManyToOne
     @JoinColumn(name = "AskedToUserId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private UserEntity userByAskedToUserId;
+
     @ManyToOne
     @JoinColumn(name = "AnsweredByUserId", referencedColumnName = "Id", insertable=false, updatable=false)
     private UserEntity userByAnsweredByUserId;
+
     @ManyToOne
     @JoinColumn(name = "ForwardedByUserId", referencedColumnName = "Id", insertable=false, updatable=false)
     private UserEntity userByForwardedByUserId;

@@ -1,5 +1,7 @@
 package com.iiitb.spe.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -29,12 +31,15 @@ public class EndorsementEntity {
     @Basic
     @Column(name = "TagId")
     private long tagId;
+
     @ManyToOne
     @JoinColumn(name = "GiverId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByGiverId;
+
     @ManyToOne
     @JoinColumn(name = "TakerId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByTakerId;
+
     @ManyToOne
     @JoinColumn(name = "TagId", referencedColumnName = "Id", nullable = false, insertable=false, updatable=false)
     private TagEntity tagByTagId;

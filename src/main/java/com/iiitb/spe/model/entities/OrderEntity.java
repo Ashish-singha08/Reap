@@ -1,11 +1,13 @@
 package com.iiitb.spe.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Order", schema = "Reap", catalog = "")
+@Table(name = "Orders", schema = "Reap", catalog = "")
 public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -20,9 +22,11 @@ public class OrderEntity {
     @Basic
     @Column(name = "ItemId")
     private long itemId;
+
     @ManyToOne
     @JoinColumn(name = "UserId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByUserId;
+
     @ManyToOne
     @JoinColumn(name = "ItemId", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private ItemEntity itemByItemId;

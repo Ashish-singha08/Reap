@@ -32,7 +32,7 @@ CREATE TABLE `Endorsement` (
                                `TagId` BIGINT NOT NULL
 );
 
-CREATE TABLE `Order` (
+CREATE TABLE `Orders` (
                                `Id` BIGINT PRIMARY KEY,
                                `UserId` BIGINT NOT NULL,
                                `OrderedOn`  DATETIME NOT NULL,
@@ -63,7 +63,7 @@ ALTER TABLE `Endorsement` ADD CONSTRAINT FK_Endorsement_TakerUser FOREIGN KEY (`
 
 ALTER TABLE `Endorsement` ADD CONSTRAINT FK_Endorsement_TagUsedByUser FOREIGN KEY (`TagId`) REFERENCES `Tag` (`Id`);
 
-ALTER TABLE `Order` ADD CONSTRAINT FK_Order_User FOREIGN KEY (`ItemId`) REFERENCES `Item` (`Id`);
+ALTER TABLE `Orders` ADD CONSTRAINT FK_Order_User FOREIGN KEY (`ItemId`) REFERENCES `Item` (`Id`);
 
 ALTER TABLE `Notification` ADD CONSTRAINT FK_NotificationTo_Userid FOREIGN KEY (`NotificationTo`) REFERENCES `User` (`Id`);
 
@@ -76,3 +76,5 @@ ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionTo_UserId FOREIGN KEY (`AskedT
 ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionAnswered_UserId FOREIGN KEY (`AnsweredByUserId`) REFERENCES `User` (`Id`);
 
 ALTER TABLE `Questions` ADD CONSTRAINT Fk_QuestionForwardedBy_UserId FOREIGN KEY (`ForwardedByUserId`) REFERENCES `User` (`Id`);
+
+INSERT INTO User (Id,Username,FullName,RoleTypeId,Email,PhoneNumber,Password,CoinBalance) VALUES ('3','bs2305','Aman Arora','MT2020012','aman@gmial.com','1234567890','1234','200');

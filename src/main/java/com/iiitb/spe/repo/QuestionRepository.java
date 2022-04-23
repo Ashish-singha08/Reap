@@ -20,7 +20,7 @@ public interface QuestionRepository extends JpaRepository<QuestionsEntity,Long> 
     @Transactional
     @Modifying
     @Query(value ="UPDATE Questions SET ForwardedByUserId =?3,  AskedToUserId = ?2  where Id=?1",nativeQuery = true)
-    void updateForwardedBy (long questionId, long forwardedUserId, long toAnswerUserId);
+    void updateForwardedBy (long questionId, long toAnswerUserId, long forwardedUserId);
 
     @Transactional
     @Modifying

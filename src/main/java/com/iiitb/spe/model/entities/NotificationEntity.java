@@ -1,5 +1,7 @@
 package com.iiitb.spe.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -30,9 +32,11 @@ public class NotificationEntity {
     @Basic
     @Column(name = "CreatedOn")
     private Timestamp createdOn;
+
     @ManyToOne
     @JoinColumn(name = "NotificationTo", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByNotificationTo;
+
     @ManyToOne
     @JoinColumn(name = "NotificationFrom", referencedColumnName = "Id", nullable = false , insertable=false, updatable=false)
     private UserEntity userByNotificationFrom;

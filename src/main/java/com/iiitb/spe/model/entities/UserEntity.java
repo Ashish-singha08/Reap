@@ -1,5 +1,7 @@
 package com.iiitb.spe.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -32,22 +34,31 @@ public class UserEntity {
     @Basic
     @Column(name = "CoinBalance")
     private int coinBalance;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByGiverId")
     private Collection<EndorsementEntity> endorsementsById;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByTakerId")
     private Collection<EndorsementEntity> endorsementsById_0;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByNotificationTo")
     private Collection<NotificationEntity> notificationsById;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByNotificationFrom")
     private Collection<NotificationEntity> notificationsById_0;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByUserId")
     private Collection<OrderEntity> ordersById;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByAskedByUserId")
     private Collection<QuestionsEntity> questionsById;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByAskedToUserId")
     private Collection<QuestionsEntity> questionsById_0;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByAnsweredByUserId")
     private Collection<QuestionsEntity> questionsById_1;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByForwardedByUserId")
     private Collection<QuestionsEntity> questionsById_2;
 
