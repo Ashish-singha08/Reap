@@ -19,6 +19,10 @@ public class ItemEntity {
     @Basic
     @Column(name = "CoinsRequired")
     private int coinsRequired;
+
+    @Basic
+    @Column(name = "imageUrl")
+    private String imageUrl;
     @JsonIgnore
     @OneToMany(mappedBy = "itemByItemId")
     private Collection<OrderEntity> ordersById;
@@ -45,6 +49,14 @@ public class ItemEntity {
 
     public void setCoinsRequired(int coinsRequired) {
         this.coinsRequired = coinsRequired;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override

@@ -171,5 +171,15 @@ h2 {
 
 .list-item{
   text-align: center;
-  width:500px;
+  width:50%;
+}
+.question{
+  display:inline-block;
+  padding:5px 30px;
+  margin: 10px;
+  font-size:25px;
+  color: #482d4a;
+  transform: skew(-7deg);
+  background-color: #dbdbdb;
+  border-radius: 3px;
 }

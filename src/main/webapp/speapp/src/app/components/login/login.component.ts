@@ -34,8 +34,8 @@ export class LoginComponent implements OnInit {
           this.errorMsg = '';
           console.log(response.token);
 
-          this.loginService.loginUser(response.token);
-          window.location.href="/dashboard";
+          this.loginService.loginUser(response.token,response.coins,response.fullName);
+         window.location.href="/dashboard";
         },
         (error:any) => {
           this.isError = true;

@@ -39,15 +39,16 @@
       <ng-template matTabContent >
         <div class="list-item">
           <mat-list>
-            <h3 matSubheader>Folders</h3>
-            <mat-list-item *ngFor="let message of questions" >
-              <img matListAvatar src="..." alt="...">
-              <h3 matLine> {{message.AskedBy}} </h3>
-              <p matLine>
-                <span> {{message.text}} </span>
-                <span class="demo-2"> -- {{message.AskedOn}} </span>
+            <h3 matSubheader>Questions</h3>
+            <mat-list-item *ngFor="let question of questions" class="question" >
+              <img matListAvatar src="https://github.com/Ashish-singha08/BudgetApp/blob/master/pexels-andrea-piacquadio-845457.jpg?raw=true" alt="{{question.AskedBy}}">
+              <h2 matLine> {{question.text}} </h2>
+              <p matLine style="font-size: 10px">
+                <span >Asked By -> {{question.AskedBy}} </span>
+                <span class="demo-2"> On {{question.AskedOn}} </span>
               </p>
-              <button   style="padding: 15px" class="mat-raised-button mat-primary"(click)="save(message.AskedOn)">Save</button>
+              <button   style="padding: 10px; margin: 6px" class="mat-raised-button mat-primary"(click)="answer(question)">Answer</button>
+              <button   style="padding: 10px; margin: 6px" class="mat-raised-button mat-primary"(click)="forward(question)">Forward</button>
             </mat-list-item>
 
           </mat-list>

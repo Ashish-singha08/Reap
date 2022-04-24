@@ -1,12 +1,12 @@
 <div class="dialog-title">
-  <h1 mat-dialog-title>Ask a Question</h1>
+  <h1 mat-dialog-title>{{heading}}</h1>
 </div>
 
 
 <mat-dialog-content [formGroup]="form" class="dialog-content">
 
-  <mat-form-field style="margin:10px"  >
-    <mat-select [formControl]="employeeCtrl" placeholder="Employee ID" #singleSelect [(ngModel)]="selectedEmployee">
+  <mat-form-field style="margin:10px" *ngIf="showIdField"  >
+    <mat-select [formControl]="employeeCtrl" placeholder="Select Employee" #singleSelect [(ngModel)]="selectedEmployee">
       <mat-option>
         <ngx-mat-select-search [formControl]="employeeFilterCtrl"></ngx-mat-select-search>
       </mat-option>
@@ -16,8 +16,8 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-form-field class="example-full-width" >
-    <mat-label>Type Your Message Here</mat-label>
+  <mat-form-field class="example-full-width" *ngIf="showTypeBox">
+    <mat-label>Type Your Question Here</mat-label>
     <textarea  matInput cdkTextareaAutosize
                cdkAutosizeMinRows="2"
                cdkAutosizeMaxRows="7" [(ngModel)]="question" [ngModelOptions]="{standalone: true}" ></textarea>
@@ -25,5 +25,5 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button class="mat-raised-button"(click)="close()">Close</button>
-  <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+  <button class="mat-raised-button mat-primary"(click)="save()">{{buttonTitle}}</button>
 </mat-dialog-actions>

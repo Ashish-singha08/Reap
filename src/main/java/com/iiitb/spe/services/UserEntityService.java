@@ -30,6 +30,10 @@ public class UserEntityService {
         UserEntity user = userRepository.findById(id);
         return user;
     }
+    public UserEntity getUserByName(String username){
+        UserEntity user = userRepository.findByUsername(username);
+        return user;
+    }
     public String updateCoins(@RequestBody Map<String,Object> payload, UserEntity user, boolean flag){
         int coins = Integer.valueOf((String) payload.get("coins"));
         if(!flag)

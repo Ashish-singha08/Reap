@@ -38,7 +38,7 @@
 
 
 .nav-list{
-  width: 70%;
+  width: 95%;
   display: flex;
   align-items: center;
 }
@@ -46,7 +46,7 @@
 
 .nav-list li{
   list-style: none;
-  padding: 31px 34px;
+  padding: 16px 19px;
   font-size: 20px;
   font-family: 'Ubuntu', sans-serif;
 }

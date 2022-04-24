@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular
 
 import {MatTabChangeEvent} from "@angular/material/tabs";
 import { EndorseService} from "src/app/services/endorse.service"
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
+import {DialogComponent} from "../dialogbox/dialog.component";
 interface Question{
   text: string,
   AskedBy: string,
@@ -27,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   ];
 
-  constructor(private endorseService:EndorseService) { }
+  constructor(private endorseService:EndorseService,private dialog: MatDialog) { }
 
    endorsements :any;
 
@@ -76,7 +78,32 @@ export class DashboardComponent implements OnInit {
    save(s:any){
      console.log(s);
    }
+   answer(question:any){
+     const dialogConfig = new MatDialogConfig();
+     dialogConfig.autoFocus = true;
+     dialogConfig.data ={
+       heading :"Answer This Question",
+       showTypeBox : true,
+       showIdField:  false,
+       question : question,
+       buttonTitle : 'Answer'
+     }
 
+     this.dialog.open(DialogComponent,dialogConfig);
+   }
+   forward(question:any){
+     const dialogConfig = new MatDialogConfig();
+     dialogConfig.autoFocus = true;
+     dialogConfig.data ={
+       heading :"Forward this Question",
+       showTypeBox : false,
+       showIdField : true,
+       question :question,
+       buttonTitle : 'Forward'
+     }
+
+     this.dialog.open(DialogComponent,dialogConfig);
+   }
   onSubmit(){
 
   }

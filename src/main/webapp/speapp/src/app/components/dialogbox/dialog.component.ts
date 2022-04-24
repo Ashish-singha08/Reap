@@ -17,9 +17,13 @@ interface Employee {
 })
 export class DialogComponent implements OnInit {
   title : string;
-  question : string;
   form: FormGroup;
-  askedOn :string;
+
+  heading : string;
+  showIdField :boolean;
+  showTypeBox: boolean;
+  question = [];
+  buttonTitle : string;
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
   protected _onDestroy = new Subject();
@@ -28,7 +32,11 @@ export class DialogComponent implements OnInit {
     this.form = fb.group({
       title: [this.title, Validators.required]
     });
-    this.askedOn = data.value;
+   this.heading = data.heading;
+   this.showIdField = data.showIdField;
+   this.showTypeBox = data.showTypeBox;
+   this.question = data.question;
+   this.buttonTitle =data.buttonTitle;
   }
 
   protected employees: Employee[] = [
@@ -104,7 +112,7 @@ export class DialogComponent implements OnInit {
     this.toastrService.error('Message Error!', 'Title Error!');
   }
   save() {
-    console.log(this.askedOn);
+
     this.showSuccess();
     this.close();
     //this.title = this.form.get('title').value;

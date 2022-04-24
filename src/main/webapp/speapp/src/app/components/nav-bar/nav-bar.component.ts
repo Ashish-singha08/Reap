@@ -12,6 +12,8 @@ import {EndroseComponent} from "../endroseform/endrose.component";
 export class NavBarComponent implements OnInit {
 
   public isLoggedIn = false;
+  public coins = localStorage.getItem("coins");
+  public fullName = localStorage.getItem("fullName");
 
   constructor(private loginService:LoginService,private dialog: MatDialog){
 
@@ -34,11 +36,14 @@ export class NavBarComponent implements OnInit {
   openQuestionDialog(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.data={
-      id :"1",
-      value : "ashu"
-    };
+    dialogConfig.data ={
+      heading :"Ask a Question",
+      showTypeBox : true,
+      showIdField:true,
+      question:[],
+      buttonTitle :'Ask'
+    }
 
-    this.dialog.open(DialogComponent,dialogConfig)
+    this.dialog.open(DialogComponent,dialogConfig);
   }
 }

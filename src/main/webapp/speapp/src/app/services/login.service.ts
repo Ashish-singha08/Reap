@@ -19,8 +19,10 @@ export class LoginService {
     return this.http.post(`${this.url}/token`, credentials);
   }
 
-  loginUser(token:any){
+  loginUser(token:any,coins:any,fullName:any){
      localStorage.setItem("token", token);
+     localStorage.setItem("coins",coins);
+     localStorage.setItem("fullName",fullName);
      return true;
   }
 

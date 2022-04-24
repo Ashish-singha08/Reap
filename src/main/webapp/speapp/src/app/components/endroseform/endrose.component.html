@@ -6,7 +6,7 @@
 <mat-dialog-content [formGroup]="form" class="dialog-content">
 
    <mat-form-field style="margin:10px"  >
-     <mat-select [formControl]="employeeCtrl" placeholder="Employee ID" #singleSelect [(ngModel)]="selectedEmployee">
+     <mat-select [formControl]="employeeCtrl" placeholder="Select Employee" #singleSelect [(ngModel)]="selectedEmployee">
        <mat-option>
          <ngx-mat-select-search [formControl]="employeeFilterCtrl"></ngx-mat-select-search>
        </mat-option>
@@ -18,7 +18,7 @@
    </mat-form-field>
 
    <mat-form-field style="margin:10px"  >
-     <mat-select [formControl]="tagCtrl" placeholder="Tag ID" #singleSelect [(ngModel)]="selectedTag">
+     <mat-select [formControl]="tagCtrl" placeholder="Select Tag" #singleSelect [(ngModel)]="selectedTag">
        <mat-option>
          <ngx-mat-select-search [formControl]="tagFilterCtrl"></ngx-mat-select-search>
        </mat-option>
@@ -40,7 +40,7 @@
 <div>
   <mat-dialog-actions >
     <button  class="mat-raised-button"(click)="close()">Close</button>
-    <button    class="mat-raised-button mat-primary"(click)="save()">Save</button>
+    <button    class="mat-raised-button mat-primary"(click)="save()">Endorse</button>
   </mat-dialog-actions>
 </div>
 

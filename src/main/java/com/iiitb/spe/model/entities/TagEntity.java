@@ -16,6 +16,10 @@ public class TagEntity {
     @Basic
     @Column(name = "Tag")
     private String tag;
+
+    @Basic
+    @Column(name = "imageUrl")
+    private String imageUrl;
     @JsonIgnore
     @OneToMany(mappedBy = "tagByTagId")
     private Collection<EndorsementEntity> endorsementsById;
@@ -34,6 +38,14 @@ public class TagEntity {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     @Override
