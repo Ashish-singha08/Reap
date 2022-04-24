@@ -86,7 +86,10 @@ export class DashboardComponent implements OnInit {
        showTypeBox : true,
        showIdField:  false,
        question : question,
-       buttonTitle : 'Answer'
+       buttonTitle : 'Answer',
+       forAskQuestion: false,
+       forAnswerQuestion:true,
+       forForwardQuestion:false
      }
 
      this.dialog.open(DialogComponent,dialogConfig);
@@ -99,7 +102,10 @@ export class DashboardComponent implements OnInit {
        showTypeBox : false,
        showIdField : true,
        question :question,
-       buttonTitle : 'Forward'
+       buttonTitle : 'Forward',
+       forAskQuestion: false,
+       forAnswerQuestion:false,
+       forForwardQuestion:true
      }
 
      this.dialog.open(DialogComponent,dialogConfig);

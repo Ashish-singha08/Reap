@@ -11,16 +11,14 @@ export class UserService {
   constructor(private httpClient:HttpClient) { }
 
   getUsers(){
-    return this.httpClient.get(`${this.url}/getUsers`);
-  }
-
-  getSpecialists(){
     let token = localStorage.getItem("token");
     let header = new HttpHeaders(
       {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpClient.get(`${this.url}/getSpecialists`,{'headers':header});
+    return this.httpClient.get(`${this.url}/getUsers`,{'headers':header});
   }
+
+
 }

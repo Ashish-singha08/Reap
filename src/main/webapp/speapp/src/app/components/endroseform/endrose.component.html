@@ -28,6 +28,10 @@
        </mat-option>
      </mat-select>
    </mat-form-field>
+  <mat-form-field  >
+    <mat-label>No Of Coins</mat-label>
+    <textarea  matInput  [(ngModel)]="coins" [ngModelOptions]="{standalone: true}" ></textarea>
+  </mat-form-field>
   <mat-form-field class="example-full-width" >
     <mat-label>Type Your Message Here</mat-label>
     <textarea  matInput cdkTextareaAutosize

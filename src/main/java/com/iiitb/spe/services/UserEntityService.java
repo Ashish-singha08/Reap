@@ -5,6 +5,7 @@ import com.iiitb.spe.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -41,5 +42,9 @@ public class UserEntityService {
         else
             userRepository.updateCoins(user.getCoinBalance()+coins,user.getId());
         return "Coins Updated";
+    }
+    public List<Object> getAllUsers(long id){
+        List<Object> users  =userRepository.findAllUsers(id);
+        return users;
     }
 }

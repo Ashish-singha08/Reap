@@ -22,8 +22,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { PatientService } from './services/patient.service';
 import {EndorseService} from './services/endorse.service';
+import {QuestionService} from "./services/question.service";
 import {MatListModule} from '@angular/material/list';
 import {MatIconModule} from '@angular/material/icon';
+import {StoreService} from "./services/store.service";
 // import { MatOption } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
@@ -75,7 +77,7 @@ import { ToastrModule } from 'ngx-toastr';
     MatDialogModule,
     MatIconModule,
   ],
-  providers: [LoginService, PatientService ,AuthGuard, EndorseService, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
+  providers: [StoreService,QuestionService,LoginService, PatientService ,AuthGuard, EndorseService, [{provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true}]],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

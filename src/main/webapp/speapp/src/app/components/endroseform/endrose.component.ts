@@ -5,6 +5,8 @@ import {ReplaySubject, Subject} from "rxjs";
 import {MatSelect} from "@angular/material/select";
 import {take, takeUntil} from "rxjs/operators";
 import { ToastrService } from 'ngx-toastr';
+import {EndorseService} from "../../services/endorse.service";
+import {UserService} from "../../services/user.service";
 
 interface Employee {
   id: string;
@@ -34,32 +36,15 @@ export class EndroseComponent implements OnInit {
   //   //     title: [this.title, Validators.required]
   //   // });
   //   }
-  constructor(private toastrService: ToastrService,private dialogRef: MatDialogRef<EndroseComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) data:any){
+  constructor(private endorseService : EndorseService, private userService : UserService,private toastrService: ToastrService,private dialogRef: MatDialogRef<EndroseComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) data:any){
     this.form = fb.group({
           title: [this.title, Validators.required]
       });
   }
 
-  protected employees: Employee[] = [
-    {id: '1', name: 'ItSolutionStuff.com'},
-    {id: '2', name: 'HDTuto.com'},
-    {id: '3', name: 'Nicesnippets.com'},
-    {id: '4', name: 'Google.com'},
-    {id: '5', name: 'laravel.com'},
-    {id: '6', name: 'npmjs.com'},
-    {id: '7', name: 'HEEDTuto.com'},
-    {id: '8', name: 'ENicesnippets.com'},
-    {id: '9', name: 'VGoogle.com'},
-    {id: '10', name: 'Alaravel.com'},
-    {id: '11', name: 'nBpmjs.com'},
-  ];
+  protected employees: Employee[] = [];
 
-  protected tags: Tag[] = [
-    {id : '1', name:'Saviour'},
-    {id : '2', name :'helper'},
-    {id : '3', name :'Solver'},
-    {id : '4', name:'Combatter'}
-  ];
+  protected tags: Tag[] = [];
 
   public employeeCtrl: FormControl = new FormControl();
   public employeeFilterCtrl: FormControl = new FormControl();
@@ -75,14 +60,13 @@ export class EndroseComponent implements OnInit {
   protected _onDestroy = new Subject();
 
 
-  selectedEmployee ={
+  selectedEmployee:Employee;
+  coins:string;
+  selectedTag:Tag;
 
-  }
-
-  selectedTag={
-
-  }
   ngOnInit() {
+    this.fetchTags();
+    this.fetchUsers();
     this.employeeCtrl.setValue(this.employees[1]);
     this.filteredEmployees.next(this.employees.slice());
     this.tagCtrl.setValue(this.tags[1]);
@@ -162,29 +146,72 @@ export class EndroseComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-  public showSuccess(): void {
-    this.toastrService.success('Appreciation is the Currency Of Success!', 'Endorsed Successfully');
+  public showSuccess(str:string): void {
+    this.toastrService.success(str, 'Endorsed Successfully');
   }
-  public showError(): void {
-    this.toastrService.error('Message Error!', 'Title Error!');
-  }
-  save() {
-    this.showSuccess();
-    this.close();
-    //this.title = this.form.get('title').value;
-    // if (this.title) {
-    //   this.kanbanService.saveNewKanban(this.title).subscribe(
-    //
-    //     response => {
-    //       console.log(response)
-    //     }
-    //   )
-    // }
-    // this.dialogRef.close();
-    // window.location.reload();
-    console.log(this.selectedEmployee);
-    console.log(this.selectedTag);
-    console.log(this.message);
+  public showError(error:any): void {
+    this.toastrService.error(error, 'Error!');
   }
 
+  fetchUsers(){
+    this.userService.getUsers().subscribe(
+      (response:any) => {
+        for(let i = 0; i < response.length; i++){
+          const emp : Employee ={ id:response[i][0].toString(),name:response[i][1] +" "+  response[i][2]};
+          //console.log(response[i][0]);
+
+          this.employees.push(emp);
+        }
+
+      },
+      (error:any) => {
+
+        console.log(error.error.message);
+
+      }
+    );
+  }
+  fetchTags(){
+    this.endorseService.getTags().subscribe(
+      (response:any) => {
+        console.log(response);
+        for(let i = 0; i < response.length; i++){
+          const tag : Tag ={ id:response[i].id.toString(),name:response[i].tag};
+          //console.log(response[i][0]);
+
+          this.tags.push(tag);
+        }
+
+      },
+      (error:any) => {
+
+        console.log(error.error.message);
+
+      }
+    );
+  }
+  save() {
+    if(parseInt(this.coins)>parseInt(localStorage.getItem("coins")!)){
+      this.showError("Insufficient Coins!!");
+    }
+    else{
+      const endorse ={
+        userId : this.selectedEmployee.id,
+        message : this.message,
+        coins :this.coins,
+        tagId : this.selectedTag.id
+      }
+      console.log(endorse);
+      this.endorseService.addEndorsement(endorse).subscribe(
+        (response:any)=>{
+          this.showSuccess("Appreciation is the Currency Of Success!");
+          this.close();
+        },
+        (error:any)=>{
+          this.showError(error);
+        }
+      );
+    }
+
+  }
 }

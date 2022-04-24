@@ -41,7 +41,10 @@ export class NavBarComponent implements OnInit {
       showTypeBox : true,
       showIdField:true,
       question:[],
-      buttonTitle :'Ask'
+      buttonTitle :'Ask',
+      forAskQuestion: true,
+      forAnswerQuestion:false,
+      forForwardQuestion:false
     }
 
     this.dialog.open(DialogComponent,dialogConfig);

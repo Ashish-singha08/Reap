@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -31,6 +32,16 @@ public class UserController {
 
     @Autowired
     private NotificationEntityService notificationEntityService;
+
+    @Autowired
+    private TagEntityService tagEntityService;
+
+    @RequestMapping("/getUsers")
+    public ResponseEntity<?> getUsers(){
+        UserEntity user = userEntityService.getDetails();
+        List<Object> users = userEntityService.getAllUsers(user.getId());
+        return ResponseEntity.ok(users);
+    }
 
     @RequestMapping("/getAllEndorsements")
     public ResponseEntity<?> getAllEndorsements(){
@@ -60,7 +71,7 @@ public class UserController {
         String update2 = userEntityService.updateCoins(payload,endorsedUser,true);
         //Endorsement Insertion
         String resEndorse = endorsementEntityService.addEndorsement(payload,headers.get("authorization"),user);
-        String resNotify = notificationEntityService.createNotification(payload,user,1,endorsedUser.getFullName());
+        String resNotify = notificationEntityService.createNotification(payload,user,1,user.getFullName());
 
         //Mail Notification
 //        MailEntity mail = new MailEntity();
@@ -69,9 +80,9 @@ public class UserController {
 //        mail.setMailSubject("Hurrah !! New Endorsement For You "+ user.getFullName().toUpperCase());
 //        mail.setMailContent("Someone has endrosed you on the platform!!!\n\nLogin Now to see :)");
 //        String email = mailService.sendEmail(mail);
-
-
-        return  ResponseEntity.ok(resEndorse+" "+update);
+        Map<String,String> m = new HashMap<>();
+        m.put("result",resEndorse);
+        return ResponseEntity.ok(m);
     }
 
 
@@ -81,6 +92,12 @@ public class UserController {
         UserEntity user = userEntityService.getDetails();
         List<NotificationEntity> notif = notificationEntityService.getAllUserNotification(user);
         return ResponseEntity.ok(notif);
+    }
+
+    @RequestMapping("/getTags")
+    public ResponseEntity<?> getTags(){
+        List<TagEntity> tags = tagEntityService.getTags();
+        return ResponseEntity.ok(tags);
     }
 }
 

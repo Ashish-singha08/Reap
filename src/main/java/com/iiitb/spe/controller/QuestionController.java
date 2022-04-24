@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,21 +55,28 @@ public class QuestionController {
         System.out.println("In ask question api");
         UserEntity user = userEntityService.getDetails();
         String res = questionsEntityService.createQuestion(payload,user);
-        return ResponseEntity.ok(res);
+        Map<String,String> m = new HashMap<>();
+        m.put("result",res);
+        return ResponseEntity.ok(m);
     }
     @RequestMapping(value ="/updateQuestion", method = RequestMethod.POST)
     public ResponseEntity<?> updateQuestion(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{
         System.out.println("In update question api");
         UserEntity user = userEntityService.getDetails();
         String res = questionsEntityService.updateForwardedByUser(payload,user);
-        return ResponseEntity.ok(res);
+        Map<String,String> m = new HashMap<>();
+        m.put("result",res);
+        return ResponseEntity.ok(m);
+
     }
     @RequestMapping(value ="/answerQuestion", method = RequestMethod.POST)
     public ResponseEntity<?> answerQuestion(@RequestBody Map<String,Object> payload, @RequestHeader Map<String,String> headers) throws Exception{
         System.out.println("In answer question api");
         UserEntity user = userEntityService.getDetails();
         String res = questionsEntityService.updateAnsweredByUser(payload,user);
-        return ResponseEntity.ok(res);
+        Map<String,String> m = new HashMap<>();
+        m.put("result",res);
+        return ResponseEntity.ok(m);
 
     }
 }

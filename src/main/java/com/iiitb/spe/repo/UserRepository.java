@@ -18,5 +18,9 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
     @Query (value ="UPDATE User SET CoinBalance =?1 where Id=?2",nativeQuery = true)
     public void updateCoins(int coins ,long id);
 
+    @Transactional
+    @Modifying
+    @Query (value ="SELECT Id ,FullName,RoleTypeId FROM User WHERE `Id` <> ?1",nativeQuery = true)
+    public List<Object> findAllUsers(long id);
 
 }
