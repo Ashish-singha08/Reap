@@ -1,18 +1,23 @@
 <app-nav-bar></app-nav-bar>
 <div class="margin">
-  <mat-tab-group dynamicHeight  (selectedTabChange)="onChange($event)">
+  <mat-tab-group dynamicHeight (selectedTabChange)="onChange($event)">
     <mat-tab label="{{tab1}}" (selectionchange)="getAllEndorsements()">
-      <ng-template matTabContent>
+      <ng-template     matTabContent>
 
-        <div class="albums" >
+        <div style="overflow: auto" class="albums" >
 
+          <div class="album " *ngFor = "let obj of userEndorsements">
 
-          <div class="album" *ngFor = "let obj of endorsements">
-            <img class="album__artwork" src="https://source.unsplash.com/random/301x301?v=10">
+            <img class="album__artwork" src={{obj.imageUrl}}>
             <div class="album__details">
-              <h2>{{obj.name}}</h2>
-              <p class="album__artist">{{obj.class}}</p>
-              <p class="album__desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum sed sint doloremque repellat, iste debitis.</p>
+              <h2 class ="blink">{{obj.tag}}</h2>
+              <p class="album__artist">Endorsed By : {{obj.giverName}}</p>
+              <p class="album__artist">Endorsed On : {{obj.time}}</p>
+              <div>
+                <p style="float: left; color: darkgoldenrod ;">{{obj.coins}}</p>
+                <i style ="color: darkgoldenrod ; margin: 10px;" class="fas fa-solid fa-coins"></i>
+                <p  style = "font-family: Garamond; font-style:italic; font-size:24px; color:white" class="blink" >"{{obj.message}}"</p>
+              </div>
             </div>
           </div>
 
@@ -23,44 +28,68 @@
     </mat-tab>
     <mat-tab label="{{tab2}}">
       <ng-template matTabContent>
-        <div class="card">
-          <img src="https://images.unsplash.com/photo-1612428978260-2b9c7df20150?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80" alt="Image">
-          <div class="details">
-            <h2>Stevie Blight</h2>
-            <p>Director</p>
+        <div class="cards">
+          <div class="card" *ngFor = "let obj of endorsements">
+            <img src={{obj.imageUrl}} alt={{obj.tag}}>
+            <div class="details">
+              <h2 class ="blink">{{obj.tag}}</h2>
+              <p style="font-size: 12px;">To: {{obj.giverName}}</p>
+              <p style="font-size: 12px;">Endorsed On : {{obj.time}}</p>
+              <div>
+                <p style="float: left;color: darkgoldenrod ;">{{obj.coins}}</p>
+                <i style ="color: darkgoldenrod ; margin: 10px;" class="fas fa-solid fa-coins"></i>
+                <p   style = "font-family: Garamond; font-style:italic; font-size:24px;" >"{{obj.message}}"</p>
+              </div>
+
+            </div>
+
           </div>
-          <p id="info">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </div>
+
       </ng-template>
     </mat-tab>
 
 
     <mat-tab label="{{tab3}}" >
       <ng-template matTabContent >
-        <div class="list-item">
-          <mat-list>
+
+          <div >
             <h3 matSubheader>Questions</h3>
-            <mat-list-item *ngFor="let question of questions" class="question" >
-              <img matListAvatar src="https://github.com/Ashish-singha08/BudgetApp/blob/master/pexels-andrea-piacquadio-845457.jpg?raw=true" alt="{{question.AskedBy}}">
-              <h2 matLine> {{question.text}} </h2>
-              <p matLine style="font-size: 10px">
-                <span >Asked By -> {{question.AskedBy}} </span>
-                <span class="demo-2"> On {{question.AskedOn}} </span>
-              </p>
-              <button   style="padding: 10px; margin: 6px" class="mat-raised-button mat-primary"(click)="answer(question)">Answer</button>
-              <button   style="padding: 10px; margin: 6px" class="mat-raised-button mat-primary"(click)="forward(question)">Forward</button>
-            </mat-list-item>
+            <div class="question"*ngFor="let question of questions">
+              <div class="details">
+                <h2 style="color:white" >Question :- {{question.text}}</h2>
+                <p style="font-size: 12px;">Asked By -> {{question.AskedBy}}</p>
+                <p style="font-size: 12px;">On {{question.AskedOn}}</p>
+                <div>
+                  <button    style="padding: 10px; margin: 6px; color:white;font-size: 20px ;" class="mat-raised-button mat-primary blink"(click)="answer(question)">Answer</button>
+                  <button   style="padding: 10px; margin: 6px ;color:white; font-size: 20px ; " class="mat-raised-button mat-primary blink"(click)="forward(question)">Forward</button>
+                </div>
 
-          </mat-list>
+              </div>
 
-        </div>
+            </div>
+          </div>
 
       </ng-template>
     </mat-tab>
 
     <mat-tab label="{{tab4}}">
       <ng-template matTabContent>
+        <div >
+          <h3 matSubheader>Questions</h3>
+          <div class="question"*ngFor="let ans of answers">
+            <div  class="details">
+              <h2 >Question :- {{ans.text}}</h2>
+              <p style="font-size: 12px;">Asked By -> {{ans.AskedBy}}</p>
+              <p style="font-size: 12px;">On {{ans.AskedOn}}</p>
+              <div>
+               <p style="font-size: 26px ;color:gold" class ="blink"> Answer :- {{ans.answer}}</p>
+              </div>
 
+            </div>
+
+          </div>
+        </div>
 
       </ng-template>
     </mat-tab>

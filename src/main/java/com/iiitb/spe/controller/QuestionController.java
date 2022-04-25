@@ -30,7 +30,7 @@ public class QuestionController {
     public ResponseEntity<?> getAllQuestionsUserAnswered(){
         System.out.println("In get all getAllQuestionsUserAnswered api");
         UserEntity user = userEntityService.getDetails();
-        List<QuestionsEntity> questions = questionsEntityService.getAllQuestionsAnsweredByUser(user);
+        List<String[]> questions = questionsEntityService.getAllQuestionsAnsweredByUser(user);
         return ResponseEntity.ok(questions);
     }
 
@@ -38,7 +38,7 @@ public class QuestionController {
     public ResponseEntity<?> getAllQuestionUserAsked(){
         System.out.println("In get all getAllQuestionUserAsked api");
         UserEntity user = userEntityService.getDetails();
-        List<QuestionsEntity> questions = questionsEntityService.getAllQuestionsAskedByUser(user);
+        List<String[]> questions = questionsEntityService.getAllQuestionsAskedByUser(user);
 
         return ResponseEntity.ok(questions);
     }
@@ -46,7 +46,7 @@ public class QuestionController {
     public ResponseEntity<?> getAllQuestionAskedToUser(){
         System.out.println("In get all getAllQuestionUserAsked api");
         UserEntity user = userEntityService.getDetails();
-        List<QuestionsEntity> questions = questionsEntityService.getAllQuestionsAskedToUser(user);
+        List<String[]> questions = questionsEntityService.getAllQuestionsAskedToUser(user);
         return ResponseEntity.ok(questions);
     }
 

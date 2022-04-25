@@ -12,7 +12,7 @@ public interface QuestionRepository extends JpaRepository<QuestionsEntity,Long> 
 
     QuestionsEntity findById(long userId);
     List<QuestionsEntity> findByAskedByUserId (long userId);
-
+    @Query(value="SELECT * FROM Questions where AskedToUserId=?1 And AnsweredByUserId IS NULL",nativeQuery = true)
     List<QuestionsEntity> findByAskedToUserId (long  userId);
 
     List<QuestionsEntity> findByAnsweredByUserId (long userId);

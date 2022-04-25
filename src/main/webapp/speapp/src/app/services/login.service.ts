@@ -38,6 +38,8 @@ export class LoginService {
 
   logout(){
     localStorage.removeItem("token");
+    localStorage.removeItem("coins");
+    localStorage.removeItem("fullName");
     return true;
   }
 

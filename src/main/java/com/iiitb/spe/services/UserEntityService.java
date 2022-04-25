@@ -41,7 +41,7 @@ public class UserEntityService {
           userRepository.updateCoins(user.getCoinBalance()-coins,user.getId());
         else
             userRepository.updateCoins(user.getCoinBalance()+coins,user.getId());
-        return "Coins Updated";
+        return String.valueOf(user.getCoinBalance()-coins);
     }
     public List<Object> getAllUsers(long id){
         List<Object> users  =userRepository.findAllUsers(id);

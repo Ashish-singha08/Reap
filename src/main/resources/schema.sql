@@ -64,6 +64,7 @@ CREATE TABLE Questions(
                                 `AskedToUserId` BIGINT NOT NULL,
                                 `AnsweredByUserId` BIGINT,
                                 `ForwardedByUserId` BIGINT,
+                                 `AskedOn` TIMESTAMP,
                                 `Answer` VARCHAR(400)
 );
 ALTER TABLE `Endorsement` ADD CONSTRAINT FK_Endorsement_GiverUser FOREIGN KEY (`GiverId`) REFERENCES `User` (`Id`);

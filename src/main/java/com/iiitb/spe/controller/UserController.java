@@ -47,14 +47,14 @@ public class UserController {
     public ResponseEntity<?> getAllEndorsements(){
         System.out.println("In get all Endorsements api");
         UserEntity user = userEntityService.getDetails();
-        List<EndorsementEntity> endorsements = endorsementEntityService.getAllEndorsements(user.getId());
+        List<String[]> endorsements = endorsementEntityService.getAllEndorsements(user.getId());
         return ResponseEntity.ok(endorsements);
     }
     @RequestMapping("/getAllUserEndorsements")
     public ResponseEntity<?> getAllUserEndorsements(){
         System.out.println("In get all UserEndorsements api");
         UserEntity user = userEntityService.getDetails();
-        List<EndorsementEntity> endorsements = endorsementEntityService.getAllUserEndorsements(user.getId());
+        List<String[]> endorsements = endorsementEntityService.getAllUserEndorsements(user.getId());
         return ResponseEntity.ok(endorsements);
     }
 

@@ -13,7 +13,13 @@ interface Employee {
   id: string;
   name: string;
 }
-
+interface Question{
+  id:string,
+  text: string,
+  AskedBy: string,
+  AskedOn :string,
+  answer:string
+}
 @Component({
   selector: 'app-reap-dialog',
   templateUrl: './dialog.component.html',
@@ -27,7 +33,7 @@ export class DialogComponent implements OnInit {
   heading : string;
   showIdField :boolean;
   showTypeBox: boolean;
-  question = [];
+  question :Question;
   buttonTitle : string;
   forAskQuestion: boolean;
   forAnswerQuestion:boolean;
@@ -43,6 +49,7 @@ export class DialogComponent implements OnInit {
     this.form = fb.group({
       title: [this.title, Validators.required]
     });
+
    this.heading = data.heading;
    this.showIdField = data.showIdField;
    this.showTypeBox = data.showTypeBox;
@@ -54,19 +61,6 @@ export class DialogComponent implements OnInit {
 
   }
 
-  // protected employees: Employee[] = [
-  //   {id: '1', name: 'ItSolutionStuff.com'},
-  //   {id: '2', name: 'HDTuto.com'},
-  //   {id: '3', name: 'Nicesnippets.com'},
-  //   {id: '4', name: 'Google.com'},
-  //   {id: '5', name: 'laravel.com'},
-  //   {id: '6', name: 'npmjs.com'},
-  //   {id: '7', name: 'HEEDTuto.com'},
-  //   {id: '8', name: 'ENicesnippets.com'},
-  //   {id: '9', name: 'VGoogle.com'},
-  //   {id: '10', name: 'Alaravel.com'},
-  //   {id: '11', name: 'nBpmjs.com'},
-  // ];
 
   selectedEmployee:Employee;
 
@@ -120,18 +114,24 @@ export class DialogComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-  public showSuccess(): void {
-    this.toastrService.success('Appreciation is the Currency Of Success!', 'Endorsed Successfully');
+  public showSuccess(str:any): void {
+    this.toastrService.success(str, 'Endorsed Successfully');
   }
   public showError(): void {
     this.toastrService.error('Message Error!', 'Title Error!');
+  }
+  public showInfo(str:any):void{
+    this.toastrService.info(str,"Info!!")
   }
   askQuestion(){
    let newQues ={ Question : this.askQues,answerId:this.selectedEmployee.id};
    this.questionService.askQuestion(newQues).subscribe(
      (response:any) => {
        console.log(response);
-       this.showSuccess();
+
+       this.close();
+
+       this.showSuccess('Successfully Created a new Question!!');
      },
      (error:any) => {
 
@@ -141,10 +141,40 @@ export class DialogComponent implements OnInit {
    );
   }
   updateQuestion(){
+    let newQues ={ QuestionId : this.question.id,ForwardedToUserId:this.selectedEmployee.id};
+    this.questionService.updateQuestion(newQues).subscribe(
+      (response:any) => {
+        console.log(response);
 
+        this.close();
+        //window.location.href="/dashboard";
+        this.showSuccess('Successfully forwarded this question!');
+      },
+      (error:any) => {
+
+        console.log(error);
+        this.showError();
+      }
+    );
   }
   answerQuestion(){
+    let newQues ={ QuestionId : this.question.id,Answer:this.askQues};
+    this.questionService.answerQuestion(newQues).subscribe(
+      (response:any) => {
+        console.log(response);
 
+        this.close();
+        let coin = parseInt(localStorage.getItem("coins")!)+20;
+        localStorage.setItem("coins",coin.toString());
+        //window.location.href="/dashboard";
+        this.showSuccess('Successfully Answered this question! Earned 20 Coins :) ');
+      },
+      (error:any) => {
+
+        console.log(error);
+        this.showError();
+      }
+    );
   }
   save() {
     if(this.forAskQuestion){
@@ -156,7 +186,7 @@ export class DialogComponent implements OnInit {
     else if(this.forAnswerQuestion){
       this.answerQuestion();
     }
-    this.close();
+
   }
 
   fetchUsers(){

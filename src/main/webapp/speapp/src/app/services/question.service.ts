@@ -16,7 +16,7 @@ export class QuestionService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.get(`${this.url}/getAllQuestionsUserAnswered`,{'headers':header});
+    return this.httpCLient.get(`${this.url}/ques/getAllQuestionsUserAnswered`,{'headers':header});
   }
   getAllQuestionUserAsked(){
     let token = localStorage.getItem("token");
@@ -25,7 +25,7 @@ export class QuestionService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.get(`${this.url}/getAllQuestionUserAsked`,{'headers':header});
+    return this.httpCLient.get(`${this.url}/ques/getAllQuestionUserAsked`,{'headers':header});
   }
   getAllQuestionAskedToUser(){
     let token = localStorage.getItem("token");
@@ -34,7 +34,7 @@ export class QuestionService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.get(`${this.url}/getAllQuestionAskedToUser`,{'headers':header});
+    return this.httpCLient.get(`${this.url}/ques/getAllQuestionAskedToUser`,{'headers':header});
   }
   askQuestion(question:any){
     let token = localStorage.getItem("token");
@@ -52,7 +52,7 @@ export class QuestionService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.post(`${this.url}/updateQuestion`,question,{'headers':header});
+    return this.httpCLient.post(`${this.url}/ques/updateQuestion`,question,{'headers':header});
   }
   answerQuestion(answer:any){
     let token = localStorage.getItem("token");
@@ -61,6 +61,6 @@ export class QuestionService {
         Authorization  : "Bearer " + token
       }
     )
-    return this.httpCLient.post(`${this.url}/answerQuestion`,answer,{'headers':header});
+    return this.httpCLient.post(`${this.url}/ques/answerQuestion`,answer,{'headers':header});
   }
 }

@@ -204,8 +204,12 @@ export class EndroseComponent implements OnInit {
       console.log(endorse);
       this.endorseService.addEndorsement(endorse).subscribe(
         (response:any)=>{
-          this.showSuccess("Appreciation is the Currency Of Success!");
+
           this.close();
+          let coin = parseInt(localStorage.getItem("coins")!)-parseInt(this.coins);
+          localStorage.setItem("coins",coin.toString());
+          //window.location.href="/dashboard";
+          this.showSuccess("Appreciation is the Currency Of Success!");
         },
         (error:any)=>{
           this.showError(error);

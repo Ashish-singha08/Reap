@@ -20,17 +20,32 @@ public class EndorsementEntityService {
 
 
 
-    public List<EndorsementEntity> getAllEndorsements(Long giverId){
+    public List<String[]> getAllEndorsements(Long giverId){
         List<EndorsementEntity> endorsements = new ArrayList<>();
 
         endorsementRepository.findAllEndorsementsByGiverId(giverId).forEach(endorsement->endorsements.add(endorsement));
-        return endorsements;
+        List<String[]> ans = new ArrayList<>();
+        for(int i=0;i<endorsements.size();i++){
+            EndorsementEntity en = endorsements.get(i);
+            String a[] ={en.getTagByTagId().getTag(),en.getMessage(),en.getEndorsedOn().toString(),en.getUserByTakerId().getFullName(),
+                    en.getTagByTagId().getImageUrl(),String.valueOf(en.getCoinsEndorsed())};
+            ans.add(a);
+        }
+        return ans;
     }
-    public List<EndorsementEntity> getAllUserEndorsements(Long takerId){
+    public List<String[]> getAllUserEndorsements(Long takerId){
         List<EndorsementEntity> endorsements = new ArrayList<>();
 
         endorsementRepository.findAllEndorsementsByTakerId(takerId).forEach(endorsement->endorsements.add(endorsement));
-        return endorsements;
+        List<String[]> ans = new ArrayList<>();
+        for(int i=0;i<endorsements.size();i++){
+            EndorsementEntity en = endorsements.get(i);
+            String a[] ={en.getTagByTagId().getTag(),en.getMessage(),en.getEndorsedOn().toString(),en.getUserByGiverId().getFullName(),
+                    en.getTagByTagId().getImageUrl(),String.valueOf(en.getCoinsEndorsed())};
+            ans.add(a);
+        }
+        return ans;
+
     }
 
     public String addEndorsement(Map<String,Object> payload, String token,UserEntity user){

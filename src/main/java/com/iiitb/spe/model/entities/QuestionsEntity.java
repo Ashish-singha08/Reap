@@ -3,6 +3,7 @@ package com.iiitb.spe.model.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
@@ -31,6 +32,9 @@ public class QuestionsEntity {
     @Column(name = "Answer")
     private String answer;
 
+    @Basic
+    @Column(name="AskedOn")
+    private Timestamp askedOn;
     @ManyToOne
     @JoinColumn(name = "AskedByUserId", referencedColumnName = "Id", nullable = false,insertable=false, updatable=false)
     private UserEntity userByAskedByUserId;
@@ -53,6 +57,14 @@ public class QuestionsEntity {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Timestamp getAskedOn() {
+        return askedOn;
+    }
+
+    public void setAskedOn(Timestamp askedOn) {
+        this.askedOn = askedOn;
     }
 
     public String getQuestion() {
