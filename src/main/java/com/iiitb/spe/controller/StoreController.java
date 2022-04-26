@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -50,7 +51,10 @@ public class StoreController {
         UserEntity user = userEntityService.getDetails();
         String coinUpdate = userEntityService.updateCoins(payload,user,false);
         String res = orderEntityService.placeAnOrder(payload,user);
-        return ResponseEntity.ok(res);
+        Map<String,String> m = new HashMap<>();
+        m.put("result",res);
+        return ResponseEntity.ok(m);
+
     }
 
 }

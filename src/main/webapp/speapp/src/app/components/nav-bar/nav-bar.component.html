@@ -22,12 +22,15 @@
     <li  *ngIf="isLoggedIn">
       <a  (click)="logout()">Logout</a>
     </li>
-    <li style="margin-left: 25%" *ngIf="isLoggedIn">
+    <li style="margin-left: 20%" *ngIf="isLoggedIn">
       <a  >Hi {{fullName}}</a>
     </li>
     <li  style="float: right ;" *ngIf="isLoggedIn">
       <i style ="color: gold ; margin: 5px;" class="fas fa-solid fa-coins"></i>
       <a  style="color:gold;">{{coins}}</a>
+    </li>
+    <li  style="float: right ;" *ngIf="isLoggedIn">
+      <mat-icon style ="color: white ; margin: 5px;" matBadge="15" matBadgeColor="warn" >notifications_none</mat-icon>
     </li>
   </ul>
 

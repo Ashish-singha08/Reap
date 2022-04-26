@@ -36,7 +36,8 @@ public class UserEntityService {
         return user;
     }
     public String updateCoins(@RequestBody Map<String,Object> payload, UserEntity user, boolean flag){
-        int coins = Integer.valueOf((String) payload.get("coins"));
+        String s = (String)payload.get("coins");
+        int coins = Integer.valueOf(s);
         if(!flag)
           userRepository.updateCoins(user.getCoinBalance()-coins,user.getId());
         else

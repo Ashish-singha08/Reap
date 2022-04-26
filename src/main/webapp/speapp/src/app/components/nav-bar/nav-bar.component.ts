@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+
 import { LoginService } from 'src/app/services/login.service';
 import {DialogComponent} from "../dialogbox/dialog.component";
 import {EndroseComponent} from "../endroseform/endrose.component";
@@ -44,7 +45,8 @@ export class NavBarComponent implements OnInit {
       buttonTitle :'Ask',
       forAskQuestion: true,
       forAnswerQuestion:false,
-      forForwardQuestion:false
+      forForwardQuestion:false,
+      forBuyItem:false
     }
 
     this.dialog.open(DialogComponent,dialogConfig);

@@ -94,7 +94,8 @@ export class DashboardComponent implements OnInit {
        buttonTitle : 'Answer',
        forAskQuestion: false,
        forAnswerQuestion:true,
-       forForwardQuestion:false
+       forForwardQuestion:false,
+       forBuyItem:false
      }
 
      this.dialog.open(DialogComponent,dialogConfig);
@@ -110,7 +111,8 @@ export class DashboardComponent implements OnInit {
        buttonTitle : 'Forward',
        forAskQuestion: false,
        forAnswerQuestion:false,
-       forForwardQuestion:true
+       forForwardQuestion:true,
+       forBuyItem:false
      }
 
      this.dialog.open(DialogComponent,dialogConfig);

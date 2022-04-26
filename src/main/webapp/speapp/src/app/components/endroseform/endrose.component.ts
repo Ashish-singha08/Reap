@@ -26,16 +26,7 @@ export class EndroseComponent implements OnInit {
   title : string;
   form: FormGroup;
   message : string
-  // constructor(
-  //   // private fb: FormBuilder,
-  //   // private dialogRef: MatDialogRef<EndroseComponent>,
-  //   // @Inject(MAT_DIALOG_DATA) data,
-  //   // //private kanbanService: KanbanService) {
-  //   //
-  //   //   this.form = fb.group({
-  //   //     title: [this.title, Validators.required]
-  //   // });
-  //   }
+
   constructor(private endorseService : EndorseService, private userService : UserService,private toastrService: ToastrService,private dialogRef: MatDialogRef<EndroseComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) data:any){
     this.form = fb.group({
           title: [this.title, Validators.required]

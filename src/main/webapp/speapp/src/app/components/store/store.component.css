@@ -340,3 +340,16 @@ body{
     transform: scale(1.0);
   }
 }
+
+.blink{
+  color :darkgoldenrod;
+  font-style: italic;
+  animation: blink 4s linear infinite;
+  font-family: Garamond;
+
+}
+@keyframes blink{
+  0%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
+}

@@ -1,9 +1,9 @@
 <app-nav-bar></app-nav-bar>
 <body>
 <div class="container">
-  <div class="card-1 card-div">
+  <div class="card-1 card-div" *ngFor="let item of items">
     <div class="like-icon-div">
-      <label for="card-1-like" class="like-icon-div-child">
+      <label  class="like-icon-div-child">
         <input type="checkbox" id="card-1-like">
         <i class="far fa-heart heart-empty"></i>
         <i class="fas fa-heart heart-fill"></i>
@@ -11,92 +11,23 @@
     </div>
 
     <div class="gow-img-div img-div">
-      <img src="https://github.com/Ashish-singha08/BudgetApp/blob/master/images/Cartoon%20White%20Pink%20Cute%20Bear%20with%20a%20Heart%20Greeting%20Card.jpg?raw=true" alt="god-of-war-figurine">
-
+      <img src="{{item.imageUrl}}" alt="{{item.name}}">
     </div>
     <div class="text-container">
-      <h2 class="item-name">Kratos and Artreus Statue - God Of War</h2>
-      <p class="date"> Departure date: 31/03/2021 </p>
       <div class="pricing-and-cart">
-        <div class="pricing">
+        <div class="pricing blink">
           <i class="fas fa-solid fa-coins"></i>
-          <p class="current-price">$599</p>
+          <p class="current-price">{{item.coins}}</p>
         </div>
-
       </div>
+      <p class="date"> Departure date: Immediately </p>
+      <h2 style ="font-family: Garamond; font-size: 24px; color: darkgoldenrod; margin: 20px;"class="item-name">{{item.name}}</h2>
+    <div style="align-content: center;">
+      <button   style="padding: 10px; margin: 6px ;color:white; font-size: 16px ; " class="mat-raised-button mat-primary" (click)="buy(item)">Buy</button>
+    </div>
     </div>
   </div>
 
-  <div class="card-2 card-div">
-    <div class="like-icon-div">
-      <label for ="card-2-like" class="like-icon-div-child">
-        <input type="checkbox" id="card-2-like">
-        <i class="far fa-heart heart-empty"></i>
-        <i class="fas fa-heart heart-fill"></i>
-      </label>
-    </div>
-    <div class="sekiro-img-div img-div">
-      <img src="https://github.com/Ashish-singha08/BudgetApp/blob/master/images/Modern%20You're%20the%20Wine%20I%20Want%20Card%20.jpg?raw=true" alt="sekiro-figurine">
-    </div>
-    <div class="text-container">
-      <h2 class="item-name">Sekiro Statue - Sekiro: Shadows Die Twice</h2>
-      <p class="date"> Departure date: 31/03/2021 </p>
-      <div class="pricing-and-cart">
-        <div class="pricing">
-          <p class="previous-price">$50</p>
-          <p class="current-price">$799</p>
-        </div>
-        <i class="fas fa-shopping-cart"></i>
-      </div>
-    </div>
-  </div>
 
-  <div class="card-3 card-div">
-    <div class="like-icon-div">
-      <label for="card-3-like" class="like-icon-div-child">
-        <input type="checkbox" id="card-3-like">
-        <i class="far fa-heart heart-empty"></i>
-        <i class="fas fa-heart heart-fill"></i>
-      </label>
-    </div>
-    <div class="dazai-img-div img-div">
-      <img src="https://github.com/Ashish-singha08/BudgetApp/blob/master/images/Brown%20and%20Pastel%20Red%20Cafe%20Drink%20Ilustrated%20Thank%20You%20Card.jpg?raw=true" alt="sekiro-figurine">
-    </div>
-    <div class="text-container">
-      <h2 class="item-name">Osamu Dazai Funko Pop - Bungou Stray Dogs</h2>
-      <p class="date"> Departure date: 31/03/2021 </p>
-      <div class="pricing-and-cart">
-        <div class="pricing">
-          <p class="previous-price">$449</p>
-          <p class="current-price">$279</p>
-        </div>
-        <i class="fas fa-shopping-cart"></i>
-      </div>
-    </div>
-  </div>
-
-  <div class="card-4 card-div">
-    <div class="like-icon-div">
-      <label for="card-4-like" class="like-icon-div-child">
-        <input type="checkbox" id="card-4-like">
-        <i class="far fa-heart heart-empty"></i>
-        <i class="fas fa-heart heart-fill"></i>
-      </label>
-    </div>
-    <div class="u4-img-div img-div">
-      <img src="https://github.com/Ashish-singha08/BudgetApp/blob/master/images/Yellow%20Minimalist%20Pet%20Shop%20(Card%20(Portrait)).jpg?raw=true" alt="u4-figurine">
-    </div>
-    <div class="text-container">
-      <h2 class="item-name">Nathan Drake Statue - Uncharted 4: A Thief's End</h2>
-      <p class="date"> Departure date: 31/03/2021 </p>
-      <div class="pricing-and-cart">
-        <div class="pricing">
-          <p class="previous-price">$759</p>
-          <p class="current-price">$499</p>
-        </div>
-        <i class="fas fa-shopping-cart"></i>
-      </div>
-    </div>
-  </div>
 </div>
 </body>

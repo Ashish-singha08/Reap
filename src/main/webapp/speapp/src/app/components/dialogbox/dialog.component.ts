@@ -7,7 +7,7 @@ import {ReplaySubject, Subject} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {QuestionService} from "../../services/question.service";
 import {UserService} from "../../services/user.service";
-import {EndorseService} from "../../services/endorse.service";
+import {StoreService} from "../../services/store.service";
 
 interface Employee {
   id: string;
@@ -38,14 +38,17 @@ export class DialogComponent implements OnInit {
   forAskQuestion: boolean;
   forAnswerQuestion:boolean;
   forForwardQuestion:boolean;
+  forBuyItem:boolean;
 
+  order:any;
   protected employees:Employee[] =[];
 
   @ViewChild('singleSelect', { static: true }) singleSelect: MatSelect;
 
   protected _onDestroy = new Subject();
 
-  constructor(private userService : UserService,private questionService: QuestionService,private toastrService: ToastrService,private dialogRef: MatDialogRef<DialogComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) data:any){
+  constructor(private storeService :StoreService,private userService : UserService,private questionService: QuestionService
+   ,private toastrService: ToastrService,private dialogRef: MatDialogRef<DialogComponent>, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) data:any){
     this.form = fb.group({
       title: [this.title, Validators.required]
     });
@@ -53,12 +56,14 @@ export class DialogComponent implements OnInit {
    this.heading = data.heading;
    this.showIdField = data.showIdField;
    this.showTypeBox = data.showTypeBox;
-   this.question = data.question;
    this.buttonTitle =data.buttonTitle;
    this.forAnswerQuestion = data.forAnswerQuestion;
    this.forForwardQuestion = data.forForwardQuestion;
    this.forAskQuestion = data.forAskQuestion;
-
+   this.forBuyItem = data.forBuyItem;
+   if(this.forBuyItem)
+     this.order =data.question;
+   else this.question = data.question;
   }
 
 
@@ -115,10 +120,10 @@ export class DialogComponent implements OnInit {
     this.dialogRef.close();
   }
   public showSuccess(str:any): void {
-    this.toastrService.success(str, 'Endorsed Successfully');
+    this.toastrService.success(str, 'Success!');
   }
-  public showError(): void {
-    this.toastrService.error('Message Error!', 'Title Error!');
+  public showError(str:any): void {
+    this.toastrService.error(str, 'Error!');
   }
   public showInfo(str:any):void{
     this.toastrService.info(str,"Info!!")
@@ -136,7 +141,7 @@ export class DialogComponent implements OnInit {
      (error:any) => {
 
        console.log(error);
-       this.showError();
+       this.showError("Error While Creating a Question!");
      }
    );
   }
@@ -153,7 +158,7 @@ export class DialogComponent implements OnInit {
       (error:any) => {
 
         console.log(error);
-        this.showError();
+        this.showError("Error while forwarding this Question!");
       }
     );
   }
@@ -172,9 +177,30 @@ export class DialogComponent implements OnInit {
       (error:any) => {
 
         console.log(error);
-        this.showError();
+        this.showError("Error While answering Question!");
       }
     );
+  }
+  placeOrder(){
+    if(parseInt(this.order.coins)>parseInt(localStorage.getItem("coins")!)){
+      this.showError("Insufficient Coins!!");
+    }
+    else{
+      const item = {itemId:this.order.id.toString(),coins:this.order.coins.toString()};
+      this.storeService.placeAnOrder(item).subscribe(
+        (response:any)=>{
+          this.showSuccess("Order Placed Successfully!!");
+          let coin = parseInt(localStorage.getItem("coins")!)-parseInt(this.order.coins);
+          localStorage.setItem("coins",coin.toString());
+          this.close();
+        },
+        (error:any)=>{
+          this.showError("error while placing Order");
+        }
+      );
+    }
+
+
   }
   save() {
     if(this.forAskQuestion){
@@ -185,6 +211,9 @@ export class DialogComponent implements OnInit {
     }
     else if(this.forAnswerQuestion){
       this.answerQuestion();
+    }
+    else if(this.forBuyItem){
+      this.placeOrder();
     }
 
   }

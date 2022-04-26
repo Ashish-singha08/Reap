@@ -119,7 +119,7 @@ h2 {
   font-style: italic;
   animation: blink 4s linear infinite;
   font-family: Garamond;
-
+  font-size: 24px;
 }
 @keyframes blink{
   0%{opacity: 0;}
